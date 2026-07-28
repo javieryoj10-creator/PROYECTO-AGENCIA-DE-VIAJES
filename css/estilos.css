@@ -370,6 +370,131 @@ ul, ol {
 }
 
 /* ==========================================
+    MENÚ RESPONSIVE CON CHECKBOX HACK (SIN JS)
+   ========================================== */
+
+/* Ocultar el checkbox en todas las pantallas */
+.check-menu-state {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .header-global {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1.2rem;
+        position: relative;
+    }
+
+    .logo-contenedor {
+        margin-right: 0;
+    }
+
+    /* El label actúa como botón interactivo */
+    .menu-hamburguesa {
+        display: block;
+        padding: 0.3rem 0.7rem;
+        border-radius: 6px;
+        background-color: var(--color-claro);
+        cursor: pointer;
+        user-select: none;
+        font-size: 1.8rem;
+        line-height: 1;
+    }
+
+    /* Estado cerrado por defecto */
+    .nav-global {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s ease-in-out, opacity 0.3s ease, margin-top 0.3s ease;
+        background-color: var(--color-blanco);
+    }
+
+    /* MAGIA CSS: Cuando el checkbox se marca (~ selecciona al hermano .nav-global) */
+    .check-menu-state:checked ~ .nav-global {
+        max-height: 380px;
+        opacity: 1;
+        border-top: 1px solid var(--color-borde);
+        margin-top: 0.75rem;
+        padding-top: 0.5rem;
+    }
+
+    /* Cambio visual opcional al botón cuando está abierto */
+    .check-menu-state:checked ~ .menu-hamburguesa {
+        background-color: var(--color-borde);
+    }
+
+    /* Estilos de la lista interna */
+    .nav-lista {
+        flex-direction: column;
+        gap: 0.25rem;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 0.5rem;
+    }
+
+    .nav-lista li {
+        width: 100%;
+    }
+
+    .nav-lista a {
+        display: block;
+        padding: 0.6rem;
+        font-weight: 600;
+        border-radius: 6px;
+    }
+
+    .nav-lista a:hover {
+        background-color: var(--color-claro);
+        color: var(--color-primario);
+    }
+
+    /* --- Hero / Carrusel adaptado a móviles --- */
+    .seccion-hero {
+        margin-bottom: 2rem;
+        border-radius: 8px;
+    }
+
+    .carrusel-contenedor {
+        height: 320px;
+    }
+
+    .hero-texto {
+        width: 90%;
+        padding: 1.25rem 1rem;
+        border-radius: 8px;
+    }
+
+    .hero-texto h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-texto p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .btn-principal {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    /* --- Rejilla de destacados a 1 columna --- */
+    .rejilla-destacados {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tarjeta-miniatura img {
+        height: 180px;
+    }
+}
+
+/* ==========================================
     9. SECCIÓN DESTINOS (FLIP-CARDS 3D)
    ========================================== */
 .seccion-destinos {
@@ -509,6 +634,46 @@ ul, ol {
     background-color: var(--color-blanco);
     color: var(--color-primario);
     transform: translateY(-2px);
+}
+
+/* ==========================================
+    RESPONSIVE: SECCIÓN DESTINOS (DESTINOS.HTML)
+   ========================================== */
+@media (max-width: 768px) {
+
+    /* 1. Ajuste de encabezados y párrafos */
+    .seccion-destinos h2 {
+        font-size: 1.8rem;
+    }
+
+    .seccion-destinos > p {
+        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+    }
+
+    /* 2. Rejilla y tarjetas centradas al 100% del contenedor */
+    .lista-tarjetas-destinos {
+        gap: 1.5rem;
+    }
+
+    .lista-tarjetas-destinos > li {
+        width: 100%;
+        max-width: 340px; /* Ancho máximo controlado para móviles */
+    }
+
+    /* 3. Ajuste de altura para pantallas pequeñas */
+    .contenedor-flip-card {
+        height: 360px;
+    }
+
+    .tarjeta-front img {
+        height: 220px;
+    }
+
+    /* 4. Optimización de interacción para pantallas táctiles (Touch) */
+    .contenedor-flip-card:active .tarjeta-interna {
+        transform: rotateY(180deg);
+    }
 }
 
 /* ==========================================
@@ -732,8 +897,9 @@ ul, ol {
 }
 
 /* ==========================================
-    RESPONSIVE: SECCIÓN TOURS PARA MÓVILES
+        RESPONSIVE: SECCIÓN TOURS (TOURS.HTML)
    ========================================== */
+    
 @media (max-width: 768px) {
 
     /* 1. Las filas dejan de ser horizontales y se apilan en vertical */
@@ -911,6 +1077,60 @@ ul, ol {
 }*/
 
 /* ==========================================
+    RESPONSIVE: SECCIÓN RECOMENDACIONES (RECOMENDACIONES.HTML)
+   ========================================== */
+@media (max-width: 900px) {
+    /* 1. Ajuste de encabezados y márgenes */
+    .seccion-recomendaciones h2 {
+        font-size: 1.8rem;
+    }
+
+    .seccion-recomendaciones > p {
+        font-size: 0.98rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem; /* Evita que el texto toque los bordes */
+    }
+
+    /* 2. Reducción del tamaño mínimo en la rejilla para permitir 2 columnas en tablets */
+    .contenedor-grid-recomendaciones {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem; /* Reducción de espacio entre tarjetas */
+    }
+
+    /* 3. Ajuste del padding interno de la tarjeta */
+    .tarjeta-recomendacion-compacta {
+        padding: 1.25rem;
+    }
+
+    /* 4. Ajuste de tipografía en títulos y listas */
+    .tarjeta-recomendacion-compacta h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .tarjeta-recomendacion-compacta > p {
+        font-size: 0.88rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .lista-requisitos-corta {
+        margin-bottom: 1rem;
+    }
+
+    .lista-requisitos-corta li {
+        font-size: 0.82rem;
+        padding-left: 1.2rem;
+    }
+}
+
+@media (max-width: 500px) {
+    /* En pantallas muy pequeñas (móviles), forzamos una sola columna */
+    .contenedor-grid-recomendaciones {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
     12. SECCIÓN GALERÍA (GALERIA.HTML)
    ========================================== */
 .seccion-galeria {
@@ -1047,6 +1267,58 @@ ul, ol {
 
 .cerrar-modal:hover {
     color: var(--color-secundario, #ff6b6b);
+}
+
+/* ==========================================
+    RESPONSIVE: SECCIÓN GALERÍA & MODAL (GALERIA.HTML)
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* 1. Ajuste de encabezado */
+    .seccion-galeria h2 {
+        font-size: 1.8rem;
+    }
+
+    .seccion-galeria > p {
+        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+    }
+
+    /* 2. Rejilla responsive: 1 columna en teléfonos o 2 estrechas en móviles grandes */
+    .cuadrante-galeria {
+        gap: 1.25rem;
+    }
+
+    .cuadrante-galeria .item-foto {
+        width: 100%;
+        max-width: 360px; /* Centra y limita el ancho máximo en pantallas pequeñas */
+    }
+
+    /* 3. Ajuste de altura de imagen */
+    .foto-interactiva {
+        height: 200px;
+    }
+
+    /* 4. Optimización del visor modal para pantallas pequeñas */
+    .modal-contenido {
+        width: 95%;
+        max-width: none;
+    }
+
+    .modal-contenido img {
+        max-height: 60vh; /* Controla que la imagen no ocupe más de la pantalla disponible */
+    }
+
+    #modal-texto-descripcion {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .cerrar-modal {
+        top: 10px;
+        right: 15px;
+        font-size: 2.2rem;
+    }
 }
 
 /* ==========================================
@@ -1193,6 +1465,47 @@ ul, ol {
 }
 
 /* ==========================================
+    RESPONSIVE: SECCIÓN NOSOTROS (NOSOTROS.HTML)
+   ========================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Ajuste de encabezados y párrafos */
+    .seccion-empresa h2 {
+        font-size: 1.8rem;
+    }
+
+    .seccion-empresa > p {
+        font-size: 0.98rem;
+    }
+
+    /* 2. Optimización de la imagen corporativa */
+    .contenedor-imagen-corporativa img {
+        height: 240px;
+    }
+
+    /* 3. Ajustes en los pilares (Misión, Visión, Valores) */
+    .lista-pilares li {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+
+    /* 4. Tabla responsive con scroll horizontal */
+    .seccion-equipo {
+        overflow-x: auto;
+    }
+
+    .tabla-estadisticas {
+        min-width: 520px;
+    }
+
+    .tabla-estadisticas th,
+    .tabla-estadisticas td {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.88rem;
+    }
+}
+
+/* ==========================================
     14. SECCIÓN: CONTACTO (CONTACTO.HTML)
    ========================================== */
 
@@ -1221,18 +1534,6 @@ ul, ol {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-
-@media (min-width: 850px) {
-    .interfaz-contacto {
-        flex-direction: row;
-        align-items: stretch;
-    }
-
-    .contacto-columna-visual,
-    .contacto-columna-formulario {
-        flex: 1;
-    }
 }
 
 /* --- COLUMNA VISUAL Y CANALES DE SOPORTE --- */
@@ -1388,4 +1689,91 @@ ul, ol {
     background-color: var(--color-secundario);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px var(--color-sombra);
+}
+
+/* ==========================================
+    RESPONSIVE: SECCIÓN CONTACTO (CONTACTO.HTML)
+   ========================================== */
+@media (max-width: 768px) {
+
+    /* 1. Encabezados y párrafos de la sección */
+    .seccion-contacto h2 {
+        font-size: 1.8rem;
+    }
+
+    .seccion-contacto > p {
+        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+    }
+
+    /* 2. Reestructurar el contenedor bilateral a columna en móviles */
+    .interfaz-contacto {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    /* 3. Ajustes de la columna visual y soporte rápido */
+    .contacto-columna-visual img {
+        height: 200px; /* Reducimos la altura para ahorrar espacio vertical */
+    }
+
+    .soporte-inmediato {
+        padding: 1.25rem;
+    }
+
+    .soporte-inmediato h3 {
+        font-size: 1.15rem;
+    }
+
+    .soporte-inmediato p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Botones de soporte directo lado a lado o apilados cómodamente */
+    .botones-chat {
+        gap: 0.75rem;
+    }
+
+    .btn-chat-link {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* 4. Ajustes del formulario */
+    .contacto-columna-formulario {
+        padding: 1.25rem;
+    }
+
+    .grupo-campo label {
+        font-size: 0.9rem;
+    }
+
+    .grupo-campo input,
+    .grupo-campo select,
+    .grupo-campo textarea {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.9rem;
+    }
+
+    .grupo-campo textarea {
+        min-height: 100px; /* Textarea ligeramente más compacto */
+    }
+
+    .btn-formulario {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 850px) {
+    .interfaz-contacto {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .contacto-columna-visual,
+    .contacto-columna-formulario {
+        flex: 1;
+    }
 }
