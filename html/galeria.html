@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora nuestra galería visual de destinos turísticos y experiencias con NexoViajes.">
+    <meta name="keywords" content="galería, fotos de viajes, imágenes, destinos, NexoViajes">
+    <title>Galería - NexoViajes</title>
+    <!-- Favicon del Proyecto -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicons/favicon-32x32.png">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+    <!-- Encabezado Global -->
+    <header class="header-global">
+        <div class="logo-contenedor">
+            <h1>NexoViajes</h1>
+        </div>
+        
+        <!-- Botón para el menú responsive en el futuro -->
+        <button class="menu-hamburguesa" aria-expanded="false" aria-label="Abrir menú de navegación">&#9776;</button>
+        
+        <!-- Menú de Navegación -->
+        <nav class="nav-global">
+            <ul class="nav-lista">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="destinos.html">Destinos</a></li>
+                <li><a href="tours.html">Tours</a></li>
+                <li><a href="recomendaciones.html">Recomendaciones</a></li>
+                <li><a href="galeria.html" aria-current="page">Galería</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="contenido-principal">
+        
+        <!-- Sección de la Galería -->
+        <section class="seccion-galeria">
+            <h2>Nuestra Galería</h2>
+            <p>Una colección de instantáneas capturadas en nuestras expediciones globales. Haz clic sobre cualquier imagen para abrir el visor interactivo.</p>
+            
+            <!-- Contenedor general preparado para la cuadrícula CSS Grid -->
+            <div class="cuadrante-galeria">
+                
+                <!-- Ítem 1 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-japon.jpg" alt="Calles tradicionales de Kioto iluminadas por linternas por la noche" class="foto-interactiva">
+                    <p class="pie-foto">Tradición en Kioto</p>
+                </div>
+
+                <!-- Ítem 2 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-suiza.jpg" alt="Un hermoso lago alpino reflejando las majestuosas montañas de los Alpes Suizos" class="foto-interactiva">
+                    <p class="pie-foto">Amanecer en los Alpes</p>
+                </div>
+
+                <!-- Ítem 3 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-aurora.jpg" alt="Cielo nocturno completamente iluminado por impresionantes auroras boreales verdes" class="foto-interactiva">
+                    <p class="pie-foto">Auroras en Islandia</p>
+                </div>
+
+                <!-- Ítem 4 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-playa.jpg" alt="Palmeras verdes frente a una playa de arena blanca y mar turquesa cristalino" class="foto-interactiva">
+                    <p class="pie-foto">Costas Tropicales</p>
+                </div>
+
+                <!-- Ítem 5 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-costarica.jpg" alt="Playa de arena con una formación rocosa y vegetación en el mar, Parque Nacional Manuel Antonio" class="foto-interactiva">
+                    <p class="pie-foto">Costa de Manuel Antonio</p>
+                </div>
+
+                <!-- Ítem 6 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-egipto.jpg" alt="Grandes pirámides de Giza bajo el sol poniente del desierto" class="foto-interactiva">
+                    <p class="pie-foto">Atardecer en las Pirámides</p>
+                </div>
+
+                <!-- Ítem 7 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-grecia.jpg" alt="Casas blancas con cúpulas azules sobre el acantilado de Santorini" class="foto-interactiva">
+                    <p class="pie-foto">Cúpulas Azules de Santorini</p>
+                </div>
+
+                <!-- Ítem 8 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-peru.jpg" alt="La mítica ciudadela inca de Machu Picchu rodeada de picos verdosos" class="foto-interactiva">
+                    <p class="pie-foto">Ciudadela de Machu Picchu</p>
+                </div>
+
+                <!-- Ítem 9 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-maldivas.jpg" alt="Bungalows sobre zancos en aguas cristalinas y turquesas en Maldivas" class="foto-interactiva">
+                    <p class="pie-foto">Paraíso sobre el Agua</p>
+                </div>
+
+                <!-- Ítem 10 -->
+                <div class="item-foto">
+                    <img src="../img/galeria/galeria-noruega.jpg" alt="Fiordo noruego con montañas escarpadas y reflejos en el agua" class="foto-interactiva">
+                    <p class="pie-foto">Majestuosos Fiordos</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ESTRUCTURA PREPARADA PARA LA VENTANA MODAL (Requisito de JavaScript) -->
+    <!-- Este contenedor permanecerá invisible mediante CSS hasta que JS le añada una clase activa -->
+    <div id="modal-visor" class="modal-oculto" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+        <!-- Botón para cerrar la ventana flotante -->
+        <button id="btn-cerrar-modal" class="cerrar-modal" aria-label="Cerrar ventana">&times;</button>
+        
+        <!-- Espacio donde JS inyectará la foto grande y su descripción dinámicamente -->
+        <div class="modal-contenido">
+            <img id="modal-imagen-grande" src="" alt="">
+            <p id="modal-texto-descripcion"></p>
+        </div>
+    </div>
+
+    <!-- Pie de Página Global -->
+    <footer class="footer-global">
+        <div class="footer-contenido">
+            <p>&copy; 2026 NexoViajes. Todos los derechos reservados.</p>
+            
+            <!-- Bloque de Redes Sociales de Marca -->
+            <div class="footer-redes">
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Visita nuestro perfil de Instagram">
+                    <svg class="icono-red" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Visita nuestra página de Facebook">
+                    <svg class="icono-red" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Visita nuestro canal de YouTube">
+                    <svg class="icono-red" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Controles de Accesibilidad Globales -->
+    <div class="controles-globales">
+        <!-- TODO (JS): Programar la lógica de cambio de tema y almacenamiento en localStorage -->
+        <button id="btn-dark-mode" class="control-flotante" aria-label="Cambiar tema visual">🌓</button>
+    
+        <!-- TODO (JS): Cambiar de 'a' a 'button' en la fase de JS para controlar su visibilidad al hacer scroll (fade in/out) -->
+        <a href="#" id="btn-back-to-top" class="control-flotante" aria-label="Volver arriba">↑</a>
+    </div>
+
+    <!-- Enlace al archivo de JavaScript -->
+    <script src="../javascript/main.js"></script>
+</body>
+</html>

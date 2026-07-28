@@ -1,0 +1,1391 @@
+/* ==========================================
+    1. VARIABLES GLOBALES Y TEMA
+   ========================================== */
+:root {
+  /* Paleta de Colores (Modo Claro) */
+    --color-primario: #0d6efd;
+    --color-secundario: #0dcaf0;
+    --color-oscuro: #212529;
+    --color-claro: #f8f9fa;
+    --color-blanco: #ffffff;
+    --color-texto: #333333;
+    --color-borde: #e0e0e0;
+    --color-sombra: rgba(0, 0, 0, 0.1);
+
+  /* Tipografía */
+    --fuente-principal: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+  /* Transiciones y Bordes */
+    --transicion-suave: all 0.3s ease;
+    --radio-borde: 8px;
+}
+
+/* Modo Oscuro (se activará mediante JS cambiando esta clase) */
+body.dark-mode {
+    --color-oscuro: #f8f9fa;
+    --color-claro: #121212;
+    --color-blanco: #1e1e1e;
+    --color-texto: #e0e0e0;
+    --color-borde: #333333;
+    --color-sombra: rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================
+    2. RESETEO UNIVERSAL
+   ========================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-claro);
+    color: var(--color-texto);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo global para imágenes y enlaces */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+/* ==========================================
+    3. LAYOUT GENERAL DE LA PÁGINA
+   ========================================== */
+.contenido-principal {
+    flex: 1; /* Empuja el footer hacia abajo si el contenido es corto */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ==========================================
+    4. HEADER Y NAVEGACIÓN GLOBAL
+   ========================================== */
+.header-global {
+    background-color: var(--color-blanco);
+    border-bottom: 1px solid var(--color-borde);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--color-sombra);
+    
+    /* Centrado horizontal y vertical */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Compatibilidad si existe el wrapper en alguna página */
+.header-global .contenedor-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-contenedor {
+    /* Desplaza NexoViajes bastante más hacia la izquierda */
+    margin-right: 8rem; /* <--- Control de distancia a la izquierda */
+}
+
+.logo-contenedor h1,
+.logo-contenedor a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+/* Lista de Navegación */
+.nav-lista {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-lista a {
+    font-weight: 500;
+    color: var(--color-texto);
+    padding: 0.5rem 0.25rem;
+    transition: var(--transicion-suave);
+    position: relative;
+}
+
+/* Efecto al pasar el mouse por los enlaces del menú */
+.nav-lista a:hover {
+    color: var(--color-primario);
+}
+
+/* Ocultamos el botón hamburguesa en pantallas grandes por defecto */
+.menu-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--color-texto);
+}
+
+/* ==========================================
+    5. FOOTER GLOBAL Y REDES SOCIALES
+   ========================================== */
+.footer-global {
+    background-color: var(--color-oscuro);
+    color: var(--color-blanco);
+    padding: 2rem 1rem;
+    margin-top: auto; /* Garantiza que se mantenga en la parte inferior */
+}
+
+.footer-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.footer-redes {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+}
+
+.icono-red {
+    color: var(--color-blanco);
+    transition: var(--transicion-suave);
+}
+
+.icono-red:hover {
+    color: var(--color-secundario);
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+    6. CONTROLES GLOBALES FLOTANTES
+   ========================================== */
+.controles-globales {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 999;
+}
+
+.control-flotante {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px var(--color-sombra);
+    transition: var(--transicion-suave);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-flotante:hover {
+    background-color: var(--color-secundario);
+    transform: scale(1.1);
+}
+
+/* ==========================================
+    7. SECCIÓN HERO Y CARRUSEL (INDEX)
+   ========================================== */
+.seccion-hero {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--color-sombra);
+}
+
+/* Contenedor del carrusel */
+.carrusel-contenedor {
+    display: flex;
+    width: 100%;
+    height: 450px;
+    position: relative;
+}
+
+.slide-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Ocultamos las imágenes adicionales por defecto hasta activar el JS */
+.slide-imagen:not(:first-child) {
+    display: none;
+}
+
+/* Tarjeta superpuesta con el texto de bienvenida */
+.hero-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    width: 550px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-texto h2 {
+    font-size: 2rem;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+}
+
+.hero-texto p {
+    color: var(--color-texto);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Botón principal dentro del Hero */
+.btn-principal {
+    display: inline-block;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 0.8rem 1.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transicion-suave);
+}
+
+.btn-principal:hover {
+    background-color: var(--color-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--color-sombra);
+}
+
+/* ==========================================
+    8. SECCIÓN DESTACADOS / TARJETAS (INDEX)
+   ========================================== */
+.seccion-destacados {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.seccion-destacados h2 {
+    text-align: center;
+    color: var(--color-primario);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-destacados p {
+    text-align: center;
+    color: var(--color-texto);
+    margin-bottom: 2rem;
+}
+
+/* Rejilla responsive usando CSS Grid */
+.rejilla-destacados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Tarjeta individual */
+.tarjeta-miniatura {
+    background-color: var(--color-blanco);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--color-sombra);
+    transition: var(--transicion-suave);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-miniatura:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-miniatura img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tarjeta-miniatura h3,
+.tarjeta-miniatura h4 {
+    color: var(--color-primario);
+    font-size: 1.3rem;
+    padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+    margin: 0;
+}
+
+.tarjeta-miniatura p {
+    text-align: left;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+    padding: 0 1.2rem 1.5rem 1.2rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+/* ==========================================
+    9. SECCIÓN DESTINOS (FLIP-CARDS 3D)
+   ========================================== */
+.seccion-destinos {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.seccion-destinos h2 {
+    text-align: center;
+    color: var(--color-primario);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-destinos > p {
+    text-align: center;
+    color: var(--color-texto);
+    margin-bottom: 2.5rem;
+}
+
+/* Rejilla para las tarjetas */
+.lista-tarjetas-destinos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+/* Le aseguramos un ancho fijo a cada tarjeta dentro de la lista */
+.lista-tarjetas-destinos > li {
+    width: 320px; /* Tamaño ideal para que entren 3 por fila en pantallas grandes */
+    max-width: 100%;
+}
+
+/* Contenedor principal 3D */
+.contenedor-flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 380px;
+   perspective: 1000px; /* Otorga el efecto de profundidad 3D */
+}
+
+/* Elemento interno que gira */
+.tarjeta-interna {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--color-sombra);
+}
+
+/* Rotación al pasar el cursor */
+.contenedor-flip-card:hover .tarjeta-interna {
+    transform: rotateY(180deg);
+}
+
+/* Caras Frontal y Trasera */
+.tarjeta-front,
+.tarjeta-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Cara Frontal */
+.tarjeta-front {
+    background-color: var(--color-blanco);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-front img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.tarjeta-front h3 {
+    color: var(--color-primario);
+    margin-top: 1.2rem;
+    font-size: 1.4rem;
+}
+
+.tarjeta-front p {
+    color: var(--color-texto);
+    font-size: 0.9rem;
+}
+
+/* Cara Trasera */
+.tarjeta-back {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Incluye ambos */
+.tarjeta-back h3,
+.tarjeta-back h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.tarjeta-back p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+/* Botón en la cara trasera */
+.btn-tarjeta {
+    display: inline-block;
+    background-color: var(--color-secundario);
+    color: var(--color-oscuro); /* Cambiado de blanco a oscuro para mayor contraste */
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transicion-suave);
+}
+
+.btn-tarjeta:hover {
+    background-color: var(--color-blanco);
+    color: var(--color-primario);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+    10. SECCIÓN TOURS - ACORDEÓN INTERACTIVO
+   ========================================== */
+.seccion-tours {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.seccion-tours .seccion-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.seccion-tours .seccion-header h2 {
+    color: var(--color-primario);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-tours .seccion-header p {
+    color: var(--color-texto);
+    font-size: 1.05rem;
+}
+
+/* Contenedor principal que permite varias filas de acordeón */
+.carrusel-tours-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Filas de acordeón (para agrupar de 5 en 5 o 4 en 4) */
+.fila-acordeon {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 480px;
+    gap: 0.8rem;
+}
+
+/* Tarjeta inactiva (estrecha) */
+.tarjeta-tour-acordeon {
+    position: relative;
+    flex: 1; /* Todas empiezan compartiendo el espacio */
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 6px 20px var(--color-sombra);
+    transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* EFECTO DE EXPANSIÓN AL PASAR EL CURSOR (HOVER) */
+.tarjeta-tour-acordeon:hover {
+    flex: 4; /* Se agrandan hasta el tamaño completo */
+}
+
+/* Imagen de fondo */
+.tour-bg-imagen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.tour-bg-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.tarjeta-tour-acordeon:hover .tour-bg-imagen img {
+    transform: scale(1.08);
+}
+
+/* Overlay degradado */
+.tour-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    z-index: 2;
+}
+
+/* Badges flotantes */
+.badge-flotante {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 4;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+}
+
+.badge-flotante.popular { background-color: rgba(255, 107, 107, 0.9); }
+.badge-flotante.aventura { background-color: rgba(13, 202, 240, 0.9); color: #000; }
+.badge-flotante.relax { background-color: rgba(157, 78, 221, 0.9); }
+.badge-flotante.oferta { background-color: rgba(255, 193, 7, 0.9); color: #000; }
+.badge-flotante.eco { background-color: rgba(25, 135, 84, 0.9); }
+
+/* Contenido de texto */
+.tour-contenido {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #ffffff;
+}
+
+/* Valoración */
+.tour-valoracion {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.tour-valoracion .estrellas { color: #ffc107; }
+.tour-valoracion .puntuacion { font-weight: 600; opacity: 0.9; }
+
+.tour-header-acordeon h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tarjeta-tour-acordeon:hover .tour-header-acordeon h3 {
+    white-space: normal;
+    font-size: 1.35rem;
+}
+
+.tour-duracion {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Ocultar detalles en estado replegado y mostrarlos al hacer hover */
+.tour-detalles-acordeon {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease;
+}
+
+.tarjeta-tour-acordeon:hover .tour-detalles-acordeon {
+    opacity: 1;
+    max-height: 250px;
+    margin-top: 0.8rem;
+}
+
+.tour-descripcion-corta {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.pills-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.pill {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tour-accion-acordeon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.etiqueta-desde { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; }
+.tour-precio { font-size: 1.2rem; font-weight: 800; }
+
+.btn-reserva-tour {
+    background-color: var(--color-primario);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transicion-suave);
+}
+
+.btn-reserva-tour:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-oscuro);
+}
+
+/* ==========================================
+    RESPONSIVE: SECCIÓN TOURS PARA MÓVILES
+   ========================================== */
+@media (max-width: 768px) {
+
+    /* 1. Las filas dejan de ser horizontales y se apilan en vertical */
+    .fila-acordeon {
+        flex-direction: column;
+        height: auto; /* Permite que crezcan según el contenido */
+        gap: 1.5rem;
+    }
+
+    /* 2. La tarjeta toma ancho completo y altura fija cómoda */
+    .tarjeta-tour-acordeon {
+        width: 100%;
+        height: 480px; /* Misma altura que tenías antes en móvil */
+        flex: none !important; /* Desactiva la expansión/colapso */
+    }
+
+    /* 3. Desactiva la animación de hover para evitar saltos en pantallas táctiles */
+    .tarjeta-tour-acordeon:hover {
+        flex: none !important;
+    }
+
+    /* 4. Forzar que los detalles, precios y descripción sean siempre visibles */
+    .tour-detalles-acordeon {
+        opacity: 1 !important;
+        max-height: none !important;
+        margin-top: 0.8rem !important;
+    }
+
+    /* 5. Asegurar que los títulos no se corten */
+    .tour-header-acordeon h3 {
+        white-space: normal !important;
+        font-size: 1.25rem !important;
+    }
+}
+
+/* ==========================================
+    11. SECCIÓN RECOMENDACIONES (RECOMENDACIONES.HTML)
+   ========================================== */
+.seccion-recomendaciones {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.seccion-recomendaciones h2 {
+    text-align: center;
+    color: var(--color-primario);
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-recomendaciones > p {
+    text-align: center;
+    color: var(--color-texto);
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Rejilla de 3 columnas para aprovechar el ancho */
+.contenedor-grid-recomendaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
+}
+
+/* Tarjeta Compacta */
+.tarjeta-recomendacion-compacta {
+    background-color: var(--color-blanco);
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 15px var(--color-sombra);
+    border: 1px solid var(--color-borde);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-recomendacion-compacta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Badge o Etiqueta de Categoría */
+.badge-categoria {
+    align-self: flex-start;
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--color-primario);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.tarjeta-recomendacion-compacta h3 {
+    color: var(--color-primario);
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+}
+
+.tarjeta-recomendacion-compacta > p {
+    color: var(--color-texto);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Lista rápida dentro de la tarjeta */
+.lista-requisitos-corta {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.25rem;
+}
+
+.lista-requisitos-corta li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.88rem;
+    color: var(--color-texto);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.lista-requisitos-corta li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-primario);
+    font-weight: bold;
+}
+
+/* Enlace a Google Travel u otros recursos */
+.enlace-externo-info {
+    font-size: 0.82rem;
+    color: var(--color-texto);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-borde);
+    margin-top: auto;
+}
+
+.enlace-externo-info a {
+    color: var(--color-primario);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.enlace-externo-info a:hover {
+    color: var(--color-secundario);
+}
+
+/* ==========================================
+    ANIMACIÓN DE REVELADO EN SCROLL (SCROLL REVEAL)
+   ========================================== */
+
+/* Estado inicial: Oculto y desplazado hacia abajo */
+/*.revelar-scroll {
+    opacity: 0;
+    transform: translateY(35px);*/
+    /* Transición suave para la entrada gradual */
+    /*transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);*/
+    /* optimización de procesamiento por la tarjeta gráfica */
+    /*will-change: opacity, transform;
+}*/
+
+/* Estado activo: Aplicado por JavaScript al entrar en el viewport */
+/*.revelar-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}*/
+
+/* ==========================================
+    12. SECCIÓN GALERÍA (GALERIA.HTML)
+   ========================================== */
+.seccion-galeria {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.seccion-galeria h2 {
+    text-align: center;
+    color: var(--color-primario);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-galeria > p {
+    text-align: center;
+    color: var(--color-texto);
+    margin-bottom: 2.5rem;
+}
+
+/* Cuadrante flexible idéntico a Destinos */
+.cuadrante-galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.cuadrante-galeria .item-foto {
+    width: 320px; /* Mismo ancho base que las tarjetas de Destinos */
+    max-width: 100%;
+}
+
+/* Contenedor de cada foto */
+.item-foto {
+    background-color: var(--color-tarjeta, #ffffff);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--color-sombra, rgba(0,0,0,0.1));
+    transition: var(--transicion-suave, transform 0.3s ease, box-shadow 0.3s ease);
+    cursor: pointer;
+    text-align: center;
+}
+
+.item-foto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--color-sombra, rgba(0,0,0,0.2));
+}
+
+/* Ajuste de la imagen */
+.foto-interactiva {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.item-foto:hover .foto-interactiva {
+    transform: scale(1.05);
+}
+
+/* Descripción de la imagen */
+.pie-foto {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-texto);
+    margin: 0;
+}
+
+/* ==========================================
+    ESTILOS DE LA VENTANA MODAL (VISOR)
+   ========================================== */
+.modal-oculto {
+    display: none; /* Invisible hasta que JS lo active */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Cuando JavaScript active el modal */
+.modal-oculto.activo {
+    display: flex;
+}
+
+.modal-contenido {
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    background-color: var(--color-tarjeta, #ffffff);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.modal-contenido img {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+    display: block;
+}
+
+#modal-texto-descripcion {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-texto);
+    margin: 0;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.2s ease;
+}
+
+.cerrar-modal:hover {
+    color: var(--color-secundario, #ff6b6b);
+}
+
+/* ==========================================
+    13. SECCIÓN: NOSOTROS (NOSOTROS.HTML)
+   ========================================== */
+
+/* 1. Sección de Introducción */
+.seccion-empresa {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.seccion-empresa h2 {
+    font-size: 2.2rem;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+}
+
+.seccion-empresa > p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    color: var(--color-texto);
+    line-height: 1.7;
+}
+
+/* Imagen Corporativa */
+.contenedor-imagen-corporativa {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radio-borde);
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--color-sombra);
+}
+
+.contenedor-imagen-corporativa img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: var(--transicion-suave);
+}
+
+.contenedor-imagen-corporativa:hover img {
+    transform: scale(1.02);
+}
+
+/* 2. Sección de Filosofía (Misión, Visión, Valores) */
+.seccion-filosofia {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    padding: 2.5rem 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 15px var(--color-sombra);
+}
+
+.seccion-filosofia h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-primario);
+    margin-bottom: 1.5rem;
+}
+
+.lista-pilares {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.lista-pilares li {
+    background-color: var(--color-claro);
+    padding: 1.25rem 1.5rem;
+    border-radius: 6px;
+    border-left: 5px solid var(--color-primario);
+    font-size: 1rem;
+    color: var(--color-texto);
+    transition: var(--transicion-suave);
+}
+
+.lista-pilares li:hover {
+    transform: translateX(5px);
+    border-left-color: var(--color-secundario);
+}
+
+.lista-pilares strong {
+    color: var(--color-primario);
+    font-size: 1.1rem;
+}
+
+/* 3. Sección de Equipo y Tabla de Estadísticas */
+.seccion-equipo {
+    margin-bottom: 2rem;
+}
+
+.seccion-equipo h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-primario);
+    margin-bottom: 0.5rem;
+}
+
+.seccion-equipo > p {
+    text-align: center;
+    color: var(--color-texto);
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos de la Tabla */
+.tabla-estadisticas {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--color-sombra);
+}
+
+.tabla-estadisticas th,
+.tabla-estadisticas td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+}
+
+.tabla-estadisticas thead {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.tabla-estadisticas th {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.tabla-estadisticas tbody tr {
+    border-bottom: 1px solid var(--color-borde);
+    transition: var(--transicion-suave);
+}
+
+.tabla-estadisticas tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tabla-estadisticas tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05); /* Sombra sutil del color primario */
+}
+
+/* ==========================================
+    14. SECCIÓN: CONTACTO (CONTACTO.HTML)
+   ========================================== */
+
+.seccion-contacto {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+}
+
+.seccion-contacto h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--color-primario);
+    margin-bottom: 0.5rem;
+}
+
+.seccion-contacto > p {
+    text-align: center;
+    color: var(--color-texto);
+    max-width: 750px;
+    margin: 0 auto 2.5rem auto;
+    font-size: 1.05rem;
+}
+
+/* Contenedor Bilateral (Dos columnas principales) */
+.interfaz-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 850px) {
+    .interfaz-contacto {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .contacto-columna-visual,
+    .contacto-columna-formulario {
+        flex: 1;
+    }
+}
+
+/* --- COLUMNA VISUAL Y CANALES DE SOPORTE --- */
+.contacto-columna-visual {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--color-sombra);
+    display: flex;
+    flex-direction: column;
+}
+
+.contacto-columna-visual img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.soporte-inmediato {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.soporte-inmediato h3 {
+    color: var(--color-primario);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.soporte-inmediato p {
+    color: var(--color-texto);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.botones-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Enlaces / Botones de Mensajería */
+.btn-chat-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    color: var(--color-blanco);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transicion-suave);
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebc57;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.btn-telegram {
+    background-color: #0088cc;
+}
+
+.btn-telegram:hover {
+    background-color: #0077b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+}
+
+/* --- COLUMNA DEL FORMULARIO --- */
+.contacto-columna-formulario {
+    background-color: var(--color-blanco);
+    padding: 2rem;
+    border-radius: var(--radio-borde);
+    box-shadow: 0 4px 15px var(--color-sombra);
+}
+
+.form-estructura {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.grupo-campo label {
+    font-weight: 600;
+    color: var(--color-texto);
+    font-size: 0.95rem;
+}
+
+.grupo-campo input,
+.grupo-campo select,
+.grupo-campo textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    background-color: var(--color-claro);
+    color: var(--color-texto);
+    font-family: var(--fuente-principal);
+    font-size: 0.95rem;
+    transition: var(--transicion-suave);
+}
+
+.grupo-campo input:focus,
+.grupo-campo select:focus,
+.grupo-campo textarea:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    background-color: var(--color-blanco);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+/* Ajuste específico para textarea */
+.grupo-campo textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Botón de Envío */
+.grupo-boton {
+    margin-top: 0.5rem;
+}
+
+.btn-formulario {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion-suave);
+}
+
+.btn-formulario:hover {
+    background-color: var(--color-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--color-sombra);
+}
