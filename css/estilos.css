@@ -56,6 +56,11 @@ body {
     flex-direction: column;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* Estilo global para imágenes y enlaces */
 img {
     max-width: 100%;
@@ -641,7 +646,7 @@ ul, ol {
 /* ==========================================
     RESPONSIVE: SECCIÓN DESTINOS (DESTINOS.HTML)
    ========================================== */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 
     /* 1. Ajuste de encabezados y párrafos */
     .seccion-destinos h2 {
@@ -902,7 +907,7 @@ ul, ol {
         RESPONSIVE: SECCIÓN TOURS (TOURS.HTML)
    ========================================== */
     
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 
     /* 1. Las filas dejan de ser horizontales y se apilan en vertical */
     .fila-acordeon {
@@ -1081,7 +1086,7 @@ ul, ol {
 /* ==========================================
     RESPONSIVE: SECCIÓN RECOMENDACIONES (RECOMENDACIONES.HTML)
    ========================================== */
-@media (max-width: 900px) {
+@media (max-width: 992px) {
     /* 1. Ajuste de encabezados y márgenes */
     .seccion-recomendaciones h2 {
         font-size: 1.8rem;
@@ -1275,7 +1280,7 @@ ul, ol {
     RESPONSIVE: SECCIÓN GALERÍA & MODAL (GALERIA.HTML)
    ========================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     /* 1. Ajuste de encabezado */
     .seccion-galeria h2 {
         font-size: 1.8rem;
@@ -1469,7 +1474,7 @@ ul, ol {
 /* ==========================================
     RESPONSIVE: SECCIÓN NOSOTROS (NOSOTROS.HTML)
    ========================================== */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     
     /* 1. Ajuste de encabezados y párrafos */
     .seccion-empresa h2 {
@@ -1700,7 +1705,7 @@ ul, ol {
 /* ==========================================
     RESPONSIVE: SECCIÓN CONTACTO (CONTACTO.HTML)
    ========================================== */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 
     /* 1. Encabezados y párrafos de la sección */
     .seccion-contacto h2 {
