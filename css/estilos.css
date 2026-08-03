@@ -1435,6 +1435,7 @@ ul, ol {
 /* Estilos de la Tabla */
 .tabla-estadisticas {
     width: 100%;
+    table-layout: fixed; /* Forzar a la tabla a no salirse del contenedor */
     border-collapse: collapse;
     background-color: var(--color-blanco);
     border-radius: var(--radio-borde);
@@ -1444,8 +1445,10 @@ ul, ol {
 
 .tabla-estadisticas th,
 .tabla-estadisticas td {
-    padding: 1rem 1.25rem;
+    padding: 0.8rem 0.5rem;
     text-align: left;
+    word-wrap: break-word; /* Permite dividir palabras largas si es necesario */
+    overflow-wrap: break-word;
 }
 
 .tabla-estadisticas thead {
@@ -1498,21 +1501,21 @@ ul, ol {
 
     /* 4. Tabla responsive con scroll horizontal */
     .seccion-equipo {
-        overflow-x: hidden;
+        width: 100%;
+        overflow-x: auto;
     }
 
     .tabla-estadisticas {
-        display: block;
-        min-width: 0;
-        overflow-x: auto;
+        width: 100%;
+        display: table; /* Mantiene la estructura nativa de tabla */
     }
 
     .tabla-estadisticas th,
     .tabla-estadisticas td {
-        padding: 0.75rem 0.8rem;
-        font-size: 0.88rem;
+        padding: 0.6rem 0.5rem;
+        font-size: 0.85rem;
         white-space: normal;
-        word-break: break-word;
+        word-break: normal;
     }
 }
 
